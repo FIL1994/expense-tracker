@@ -5,4 +5,6 @@ authors = ["Philip Van Raalte <phil.vanraalte@gmail.com>"]
 edition = "2018"
 
 [dependencies]
-currency = "0.4.0"
+diesel = { version = "1.4.1", features = ["sqlite"] }
+currency = "0.4"
+dotenv = "0.13"

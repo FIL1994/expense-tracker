@@ -1,7 +1,7 @@
 table! {
     expenses (id) {
-        id -> Nullable<Integer>,
-        name -> Nullable<Text>,
-        amount -> Nullable<Integer>,
+        id -> Integer,
+        name -> Text,
+        amount -> Integer,
     }
 }
