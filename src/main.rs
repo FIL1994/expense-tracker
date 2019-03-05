@@ -1,7 +1,6 @@
 #[macro_use]
 extern crate diesel;
 
-use currency::Currency;
 use diesel::prelude::*;
 use dotenv::dotenv;
 use std::env;
@@ -21,8 +20,8 @@ fn main() {
         .unwrap_or_else(|_| panic!("Error connecting to {}", database_url));
 
     let expense = NewExpense {
-        name: "Expense 1",
-        amount: 12,
+        name: "Expense 2",
+        amount: 12.20,
     };
 
     diesel::insert_into(schema::expenses::table)

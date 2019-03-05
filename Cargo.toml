@@ -6,5 +6,4 @@ edition = "2018"
 
 [dependencies]
 diesel = { version = "1.4.1", features = ["sqlite"] }
-currency = "0.4"
 dotenv = "0.13"
