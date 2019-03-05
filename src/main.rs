@@ -1,5 +1,4 @@
 use currency::Currency;
-use rusqlite::Connection;
 
 #[derive(Debug)]
 struct Expense {
@@ -10,8 +9,6 @@ struct Expense {
 
 fn main() {
     println!("Expense Tracker");
-
-    let conn = Connection::open_in_memory().unwrap();
 
     let expense = Expense {
         id: 1,
