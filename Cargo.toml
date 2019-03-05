@@ -1,0 +1,12 @@
+[package]
+name = "expense-tracker"
+version = "0.1.0"
+authors = ["Philip Van Raalte <phil.vanraalte@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+currency = "0.4.0"
+
+[dependencies.rusqlite]
+version = "0.16.0"
+features = ["bundled"]
