@@ -32,7 +32,7 @@ impl_web! {
 
         #[get("/expenses")]
         #[content_type("json")]
-        fn get_expenses(&self, param: API_Param) -> Result<Vec<Expense>, ()> {
+        fn get_expenses(&self, param: Api_Param) -> Result<Vec<Expense>, ()> {
             let results = expenses
                 .load::<Expense>(&param.connection)
                 .expect("Error loading expenses");
@@ -42,7 +42,7 @@ impl_web! {
 
         #[post("/expenses")]
         #[content_type("json")]
-        fn post_expenses(&self, param: API_Param, body: Vec<u8>) -> Result<Expense, ()> {
+        fn post_expenses(&self, param: Api_Param, body: Vec<u8>) -> Result<Expense, ()> {
             let json_string:&str = str::from_utf8(&body).unwrap();
             let expense: NewExpense = serde_json::from_str(json_string).unwrap();
             diesel::insert_into(schema::expenses::table)
@@ -57,16 +57,16 @@ impl_web! {
     }
 }
 
-struct API_Config {}
-struct API_Param {
+struct Api_Config {}
+struct Api_Param {
     connection: diesel::SqliteConnection,
 }
 
-impl<B: BufStream> Extract<B> for API_Param {
-    type Future = Immediate<API_Param>;
+impl<B: BufStream> Extract<B> for Api_Param {
+    type Future = Immediate<Api_Param>;
 
     fn extract(context: &Context) -> Self::Future {
-        let _config = context.config::<API_Config>().unwrap();
+        let _config = context.config::<Api_Config>().unwrap();
 
         dotenv().ok();
 
@@ -74,7 +74,7 @@ impl<B: BufStream> Extract<B> for API_Param {
         let conn = SqliteConnection::establish(&database_url)
             .unwrap_or_else(|_| panic!("Error connecting to {}", database_url));
 
-        let param = API_Param { connection: conn };
+        let param = Api_Param { connection: conn };
         Immediate::ok(param)
     }
 }
@@ -85,7 +85,7 @@ pub fn main() {
 
     ServiceBuilder::new()
         .resource(ExpenseTrackerAPI)
-        .config(API_Config {})
+        .config(Api_Config {})
         .middleware(DeflateMiddleware::new(Compression::best()))
         .run(&addr)
         .unwrap();
