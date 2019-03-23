@@ -25,6 +25,7 @@ pub struct User {
 #[derive(Insertable, Deserialize)]
 #[table_name = "users"]
 pub struct NewUser<'a> {
+    #[serde(rename = "userName")]
     pub user_name: &'a str,
     pub password: &'a str,
 }
